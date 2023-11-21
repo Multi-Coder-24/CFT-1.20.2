@@ -10,7 +10,8 @@ public enum StarShape
     diamond,
     square,
     crown,
-    pyramid;
+    pyramid,
+    star;
 
     public String getRName(){
         switch (this){
@@ -23,6 +24,7 @@ public enum StarShape
             case square -> {return "SQUARE";}
             case crown ->{return "CROWN";}
             case pyramid ->{return "PYRAMID";}
+            case star -> {return "STAR";}
         }
         return null;
     }

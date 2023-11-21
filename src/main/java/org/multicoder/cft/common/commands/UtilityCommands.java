@@ -30,7 +30,6 @@ import java.util.concurrent.atomic.AtomicReference;
 public class UtilityCommands
 {
     public static void Register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        //dispatcher.register(Commands.literal("cft").then(Commands.literal("copyTag").executes(UtilityCommands::CopyTag))).createBuilder().build();
         dispatcher.register(Commands.literal("cft").then(Commands.literal("cloneToStack").executes(UtilityCommands::CloneStack))).createBuilder().build();
         dispatcher.register(Commands.literal("cft").then(Commands.literal("SaveToPlayer").then(Commands.argument("name", StringArgumentType.string()).executes(UtilityCommands::SaveRocket)))).createBuilder().build();
         dispatcher.register(Commands.literal("cft").then(Commands.literal("LoadFromPlayer").then(Commands.argument("name",StringArgumentType.string()).executes(UtilityCommands::LoadRocket)))).createBuilder().build();

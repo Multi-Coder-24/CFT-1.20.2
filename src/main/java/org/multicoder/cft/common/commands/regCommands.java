@@ -13,34 +13,32 @@ import org.multicoder.cft.common.utility.FireworkWorldAddon;
 import java.util.Objects;
 
 @Mod.EventBusSubscriber(modid = org.multicoder.cft.Mod.MOD_ID)
-public class RegCommands
+public class regCommands
 {
+    /***
+     * Registers all the commands that CFT relies on.
+     */
     @SubscribeEvent
-    private static void OnCommandRegister(RegisterCommandsEvent event)
+    private static void onCommandRegister(RegisterCommandsEvent event)
     {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
         UtilityCommands.Register(dispatcher);
-        FireworkBaseCommands.Register(dispatcher);
-        FireworkModifierCommands.Register(dispatcher);
+        fireworkBaseCommands.registerCommands(dispatcher);
+        fireworkModifierCommands.registerCommands(dispatcher);
     }
 
+    /***
+     * Registers the firework preset storage onto the level
+     */
     @SuppressWarnings("unchecked")
     @SubscribeEvent
-    public static void OnServerStart(ServerStartedEvent event)
+    public static void onServerStart(ServerStartedEvent event)
     {
         ServerLevel level = event.getServer().getLevel(Level.OVERWORLD);
         if(Objects.nonNull(FireworkWorldAddon.DataFactory) && Objects.nonNull(level))
         {
             FireworkWorldAddon FDA = level.getDataStorage().<FireworkWorldAddon>computeIfAbsent(FireworkWorldAddon.DataFactory,FireworkWorldAddon.SaveName);
             FDA.setDirty();
-        }
-        else
-        {
-            try
-            {
-                Exception E = new NullPointerException("DataFactory or Level is null");
-            }
-            catch (Exception e){}
         }
     }
 }
