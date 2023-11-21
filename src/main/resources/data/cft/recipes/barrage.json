@@ -1,0 +1,29 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#G#",
+        "CDC",
+        "SSS"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:redstone"
+        },
+        "G": {
+            "item": "minecraft:gunpowder"
+        },
+        "C": {
+            "item": "minecraft:comparator"
+        },
+        "D": {
+            "item": "minecraft:dispenser"
+        },
+        "S": {
+            "item": "minecraft:deepslate"
+        }
+    },
+    "result": {
+        "item": "cft:barrage",
+        "count": 1
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "item.minecraft.firework_star.shape.triangle": "Triangle",
+  "item.minecraft.firework_star.shape.diamond": "Diamond",
+  "item.minecraft.firework_star.shape.square": "Square",
+  "item.minecraft.firework_star.shape.crown": "Crown",
+  "item.minecraft.firework_star.shape.pyramid": "Pyramid",
+
+  "block.cft.barrage": "Barrage Firework",
+
+  "text.blocks.cft.barrage": "Right Click with firework to add\nPulse with redstone to trigger.",
+  "interaction.cft.barrage.rocket_added": "Added Rocket To Barrage",
+  "interaction.cft.barrage.mode_change": "Barrage Mode Changed To %s",
+  "interaction.cft.barrage.random": "Barrage Randomizer Mode Changed To %s",
+  "interaction.cft.barrage.delay": "Barrage Delay Set To %s"
+}
