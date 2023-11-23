@@ -37,8 +37,8 @@ public class customInitUtility
         CompoundTag fireworkTag = stackTag.getCompound("Fireworks");
         ListTag stars;
         CompoundTag starTag = new CompoundTag();
-        int[] Cols = new int[] {color};
-        starTag.putIntArray("Colors",Cols);
+        int[] colors = new int[] {color};
+        starTag.putIntArray("Colors",colors);
         starTag.putString("neoforge:shape_type",shape.getName());
         starTag.putByte("Type",(byte) 1);
         starTag.putString("Name",name);
@@ -72,8 +72,8 @@ public class customInitUtility
         CompoundTag fireworkTag = stackTag.getCompound("Fireworks");
         ListTag stars;
         CompoundTag starTag = new CompoundTag();
-        int[] Cols = new int[] {color};
-        starTag.putIntArray("Colors",Cols);
+        int[] colors = new int[] {color};
+        starTag.putIntArray("Colors",colors);
         starTag.putString("neoforge:shape_type",shape.getName());
         starTag.putByte("Type",(byte) 1);
         starTag.putString("Name",name);
@@ -112,20 +112,14 @@ public class customInitUtility
                 selectedReference.set(starTag);
             }
         });
-        try{
-            CompoundTag starTag = selectedReference.get();
-            int[] colors = starTag.getIntArray("Colors");
-            colors = intArrHandler.addIntToArray(colors,color);
-            starTag.putIntArray("Colors",colors);
-            stars.set(indexReference.get(),starTag);
-            fireworkTag.put("Explosions",stars);
-            stackTag.put("Fireworks",fireworkTag);
-            fireworkRocket.setTag(stackTag);
-        }
-        catch(NullPointerException e)
-        {
-            return;
-        }
+        CompoundTag starTag = selectedReference.get();
+        int[] colors = starTag.getIntArray("Colors");
+        colors = intArrHandler.addIntToArray(colors,color);
+        starTag.putIntArray("Colors",colors);
+        stars.set(indexReference.get(),starTag);
+        fireworkTag.put("Explosions",stars);
+        stackTag.put("Fireworks",fireworkTag);
+        fireworkRocket.setTag(stackTag);
     }
 
     /***
@@ -154,19 +148,14 @@ public class customInitUtility
                 selectedReference.set(starTag);
             }
         });
-        try{
-            CompoundTag starTag = selectedReference.get();
-            int[] colors = starTag.getIntArray("Colors");
-            colors = intArrHandler.addIntToArray(colors,color);
-            starTag.putIntArray("Colors",colors);
-            stars.set(indexReference.get(),starTag);
-            fireworkTag.put("Explosions",stars);
-            stackTag.put("Fireworks",fireworkTag);
-            fireworkRocket.setTag(stackTag);
-        }
-        catch (NullPointerException ex){
-            return;
-        }
+        CompoundTag starTag = selectedReference.get();
+        int[] colors = starTag.getIntArray("Colors");
+        colors = intArrHandler.addIntToArray(colors,color);
+        starTag.putIntArray("Colors",colors);
+        stars.set(indexReference.get(),starTag);
+        fireworkTag.put("Explosions",stars);
+        stackTag.put("Fireworks",fireworkTag);
+        fireworkRocket.setTag(stackTag);
     }
 
     /***
@@ -191,28 +180,22 @@ public class customInitUtility
                 selectedReference.set(starTag);
             }
         });
-        try{
-            CompoundTag starTag = selectedReference.get();
-            if(!starTag.contains("FadeColors"))
-            {
-                int[] colors = new int[] {color};
-                starTag.putIntArray("FadeColors",colors);
-            }
-            else
-            {
-                int[] colors = starTag.getIntArray("FadeColors");
-                colors = intArrHandler.addIntToArray(colors,color);
-                starTag.putIntArray("FadeColors",colors);
-            }
-            stars.set(indexReference.get(),starTag);
-            Firework.put("Explosions",stars);
-            stackTag.put("Fireworks",Firework);
-            fireworkRocket.setTag(stackTag);
-        }
-        catch(NullPointerException e)
+        CompoundTag starTag = selectedReference.get();
+        if(!starTag.contains("FadeColors"))
         {
-            return;
+            int[] colors = new int[] {color};
+            starTag.putIntArray("FadeColors",colors);
         }
+        else
+        {
+            int[] colors = starTag.getIntArray("FadeColors");
+            colors = intArrHandler.addIntToArray(colors,color);
+            starTag.putIntArray("FadeColors",colors);
+        }
+        stars.set(indexReference.get(),starTag);
+        Firework.put("Explosions",stars);
+        stackTag.put("Fireworks",Firework);
+        fireworkRocket.setTag(stackTag);
     }
 
     /***
@@ -241,27 +224,22 @@ public class customInitUtility
                 selectedReference.set(starTag);
             }
         });
-        try{
-            CompoundTag starTag = selectedReference.get();
-            if(!starTag.contains("FadeColors"))
-            {
-                int[] colors = new int[] {color};
-                starTag.putIntArray("FadeColors",colors);
-            }
-            else
-            {
-                int[] colors = starTag.getIntArray("FadeColors");
-                colors = intArrHandler.addIntToArray(colors,color);
-                starTag.putIntArray("FadeColors",colors);
-            }
-            stars.set(indexReference.get(),starTag);
-            fireworkTag.put("Explosions",stars);
-            stackTag.put("Fireworks",fireworkTag);
-            fireworkRocket.setTag(stackTag);
+        CompoundTag starTag = selectedReference.get();
+        if(!starTag.contains("FadeColors"))
+        {
+            int[] colors = new int[] {color};
+            starTag.putIntArray("FadeColors",colors);
         }
-        catch (NullPointerException ex){
-            return;
+        else
+        {
+            int[] colors = starTag.getIntArray("FadeColors");
+            colors = intArrHandler.addIntToArray(colors,color);
+            starTag.putIntArray("FadeColors",colors);
         }
+        stars.set(indexReference.get(),starTag);
+        fireworkTag.put("Explosions",stars);
+        stackTag.put("Fireworks",fireworkTag);
+        fireworkRocket.setTag(stackTag);
     }
 
     /***

@@ -79,6 +79,7 @@ public class barrageBlock extends BaseEntityBlock
                 int DSig = level.getSignal(neighbor,Direction.DOWN);
                 if(DSig > 0 && DSig == 15)
                 {
+                    if(Entity.mode == (byte) 2){Entity.enabled = !Entity.enabled;}
                     Entity.Pulse();
                 }
             }

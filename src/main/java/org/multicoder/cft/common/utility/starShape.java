@@ -28,4 +28,19 @@ public enum starShape
         }
         return null;
     }
+    public static starShape getShape(int index){
+        switch (index){
+            case 0 ->{return small_ball;}
+            case 1 ->{return large_ball;}
+            case 2 ->{return burst;}
+            case 3 ->{return creeper_face;}
+            case 4 ->{return triangle;}
+            case 5 ->{return diamond;}
+            case 6 ->{return square;}
+            case 7 ->{return crown;}
+            case 8 ->{return pyramid;}
+            case 9 ->{return star;}
+        }
+        return null;
+    }
 }

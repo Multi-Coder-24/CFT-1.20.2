@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.ticks.TickPriority;
 import org.multicoder.cft.common.init.blockEntityInit;
 import org.multicoder.cft.common.init.blockInit;
+import org.multicoder.cft.common.utility.randomFireworkMaker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class barrageBlockEntity extends BlockEntity
     public List<CompoundTag> rockets;
     public byte mode;
     public boolean random;
+    public boolean enabled;
     public int delay;
     
     public barrageBlockEntity(BlockPos pos, BlockState state)
@@ -31,6 +33,7 @@ public class barrageBlockEntity extends BlockEntity
         mode = (byte) 0;
         random = false;
         delay = 0;
+        enabled = false;
     }
 
     @Override
@@ -46,6 +49,7 @@ public class barrageBlockEntity extends BlockEntity
         tag.putByte("Mode", mode);
         tag.putBoolean("Random", random);
         tag.putInt("Delay", delay);
+        tag.putBoolean("Enabled",enabled);
     }
 
     @Override
@@ -61,6 +65,7 @@ public class barrageBlockEntity extends BlockEntity
         mode = tag.getByte("Mode");
         random = tag.getBoolean("Random");
         delay = tag.getInt("Delay");
+        enabled = tag.getBoolean("Enabled");
     }
     public void IncreaseDelay()
     {
@@ -78,8 +83,11 @@ public class barrageBlockEntity extends BlockEntity
         {
             mode = (byte) 1;
         }
-        else
+        else if(mode == 1)
         {
+            mode = (byte) 2;
+        }
+        else{
             mode = (byte) 0;
         }
         setChanged();
@@ -101,33 +109,46 @@ public class barrageBlockEntity extends BlockEntity
         if(!rockets.isEmpty())
         {
             //  Rockets list not empty
-            ItemStack Firework = new ItemStack(Items.FIREWORK_ROCKET);
+            ItemStack firework = new ItemStack(Items.FIREWORK_ROCKET);
             if(random)
             {
                 //  Randomized Mode
-                int UB = rockets.size();
-                java.util.Random R = new Random();
-                int Index = R.nextInt(UB);
-                Firework.setTag(rockets.get(Index));
-                rockets.remove(Index);
+                int bound = rockets.size();
+                java.util.Random random = new Random();
+                int selectedIndex = random.nextInt(bound);
+                firework.setTag(rockets.get(selectedIndex));
+                rockets.remove(selectedIndex);
             }
             else
             {
                 //  Sequential Mode
-                Firework.setTag(rockets.get(0));
+                firework.setTag(rockets.get(0));
                 rockets.remove(0);
             }
-            FireworkRocketEntity Rocket = new FireworkRocketEntity(level,null,this.worldPosition.getX() + 0.5,this.worldPosition.getY() + 1,this.worldPosition.getZ() + 0.5,Firework);
+            FireworkRocketEntity rocketEntity = new FireworkRocketEntity(level,null,this.worldPosition.getX() + 0.5,this.worldPosition.getY() + 1,this.worldPosition.getZ() + 0.5,firework);
             if(mode == (byte) 1)
             {
                 // Timed Firing
-                int LT = Rocket.lifetime + delay;
-                level.scheduleTick(worldPosition, blockInit.BARRAGE.get(),LT, TickPriority.HIGH);
+                int scheduleDelay = rocketEntity.lifetime + delay;
+                level.scheduleTick(worldPosition, blockInit.BARRAGE.get(),scheduleDelay, TickPriority.HIGH);
             }
-            level.addFreshEntity(Rocket);
+            level.addFreshEntity(rocketEntity);
             return;
         }
-        System.out.println("Rockets Empty");
+        else
+        {
+            if(mode == (byte) 2 && enabled)
+            {
+                //  Random Rockets
+                ItemStack rocket = randomFireworkMaker.createRandomFirework();
+                FireworkRocketEntity rocketEntity = new FireworkRocketEntity(level,null,this.worldPosition.getX() + 0.5,this.worldPosition.getY() + 1,this.worldPosition.getZ() + 0.5,rocket);
+                if(delay == 0){delay = 20;}
+                int scheduleDelay = rocketEntity.lifetime + delay;
+                level.scheduleTick(worldPosition,blockInit.BARRAGE.get(),scheduleDelay,TickPriority.HIGH);
+                level.addFreshEntity(rocketEntity);
+                return;
+            }
+        }
         setChanged();
     }
 }

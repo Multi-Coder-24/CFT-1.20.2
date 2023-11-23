@@ -9,6 +9,9 @@ public class optionsUtils
         } else if (B == (byte) 1)
         {
             return "Timed";
+        } else if (B == (byte) 2)
+        {
+            return "Continuous Randomized";
         }
         return null;
     }

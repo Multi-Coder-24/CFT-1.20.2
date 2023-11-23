@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.server.command.EnumArgument;
 import org.multicoder.cft.common.utility.customInitUtility;
+import org.multicoder.cft.common.utility.randomFireworkMaker;
 import org.multicoder.cft.common.utility.starShape;
 
 public class fireworkBaseCommands
@@ -21,7 +22,32 @@ public class fireworkBaseCommands
         dispatcher.register(Commands.literal("cft").then(Commands.literal("init").then(Commands.argument("flight", IntegerArgumentType.integer(1,10)).executes(fireworkBaseCommands::setup)))).createBuilder().build();
         dispatcher.register(Commands.literal("cft").then(Commands.literal("star").then(Commands.literal("add").then(Commands.argument("shape", EnumArgument.enumArgument(starShape.class)).then(Commands.argument("color", IntegerArgumentType.integer()).then(Commands.argument("name", StringArgumentType.string()).executes(fireworkBaseCommands::addStar))))))).createBuilder().build();
         dispatcher.register(Commands.literal("cft").then(Commands.literal("star").then(Commands.literal("add").then(Commands.argument("shape",EnumArgument.enumArgument(starShape.class)).then(Commands.argument("red",IntegerArgumentType.integer(0,255)).then(Commands.argument("green",IntegerArgumentType.integer(0,255)).then(Commands.argument("blue",IntegerArgumentType.integer(0,255)).then(Commands.argument("name",StringArgumentType.string()).executes(fireworkBaseCommands::addStarRGB))))))))).createBuilder().build();
+        dispatcher.register(Commands.literal("cft").then(Commands.literal("random").executes(fireworkBaseCommands::getRandom))).createBuilder().build();
     }
+
+    private static int getRandom(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        ServerPlayer player = context.getSource().getPlayerOrException();
+        if(player.isCreative()){
+            ItemStack rocket = randomFireworkMaker.createRandomFirework();
+            rocket.setCount(16);
+            player.addItem(rocket);
+        }
+        else
+        {
+            int paperIndex = player.getInventory().findSlotMatchingItem(new ItemStack(Items.PAPER));
+            int whiteDyeIndex = player.getInventory().findSlotMatchingItem(new ItemStack(Items.WHITE_DYE));
+            int gunpowderIndex = player.getInventory().findSlotMatchingItem(new ItemStack(Items.GUNPOWDER));
+            if(paperIndex == -1 || whiteDyeIndex == -1 || gunpowderIndex == -1){return 0;}
+            player.getInventory().getItem(paperIndex).shrink(1);
+            player.getInventory().getItem(whiteDyeIndex).shrink(2);
+            player.getInventory().getItem(gunpowderIndex).shrink(1);
+            ItemStack rocket = randomFireworkMaker.createRandomFirework();
+            rocket.setCount(16);
+            player.addItem(rocket);
+        }
+        return 1;
+    }
+
 
     /***
      * Adds a star with a custom color based upon the minecraft built-in color system.
