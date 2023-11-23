@@ -1,8 +1,8 @@
 package org.multicoder.cft.common.utility;
 
-public class OptionsUtils
+public class optionsUtils
 {
-    public static String OptionToString(byte B){
+    public static String optionToString(byte B){
         if(B == (byte) 0)
         {
             return "Pulse";
@@ -12,7 +12,7 @@ public class OptionsUtils
         }
         return null;
     }
-    public static String OptionToString(boolean B)
+    public static String optionToString(boolean B)
     {
         if(B)
         {

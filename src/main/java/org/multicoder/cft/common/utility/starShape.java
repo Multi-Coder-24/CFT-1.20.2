@@ -1,6 +1,6 @@
 package org.multicoder.cft.common.utility;
 
-public enum StarShape
+public enum starShape
 {
     small_ball,
     large_ball,
@@ -13,7 +13,7 @@ public enum StarShape
     pyramid,
     star;
 
-    public String getRName(){
+    public String getName(){
         switch (this){
             case small_ball ->{ return "SMALL_BALL";}
             case large_ball ->{ return "LARGE_BALL";}

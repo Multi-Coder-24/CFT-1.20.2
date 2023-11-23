@@ -11,16 +11,16 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.server.command.EnumArgument;
-import org.multicoder.cft.common.utility.CustomInitUtility;
-import org.multicoder.cft.common.utility.StarShape;
+import org.multicoder.cft.common.utility.customInitUtility;
+import org.multicoder.cft.common.utility.starShape;
 
 public class fireworkBaseCommands
 {
     public static void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher)
     {
         dispatcher.register(Commands.literal("cft").then(Commands.literal("init").then(Commands.argument("flight", IntegerArgumentType.integer(1,10)).executes(fireworkBaseCommands::setup)))).createBuilder().build();
-        dispatcher.register(Commands.literal("cft").then(Commands.literal("star").then(Commands.literal("add").then(Commands.argument("shape", EnumArgument.enumArgument(StarShape.class)).then(Commands.argument("color", IntegerArgumentType.integer()).then(Commands.argument("name", StringArgumentType.string()).executes(fireworkBaseCommands::addStar))))))).createBuilder().build();
-        dispatcher.register(Commands.literal("cft").then(Commands.literal("star").then(Commands.literal("add").then(Commands.argument("shape",EnumArgument.enumArgument(StarShape.class)).then(Commands.argument("red",IntegerArgumentType.integer(0,255)).then(Commands.argument("green",IntegerArgumentType.integer(0,255)).then(Commands.argument("blue",IntegerArgumentType.integer(0,255)).then(Commands.argument("name",StringArgumentType.string()).executes(fireworkBaseCommands::addStarRGB))))))))).createBuilder().build();
+        dispatcher.register(Commands.literal("cft").then(Commands.literal("star").then(Commands.literal("add").then(Commands.argument("shape", EnumArgument.enumArgument(starShape.class)).then(Commands.argument("color", IntegerArgumentType.integer()).then(Commands.argument("name", StringArgumentType.string()).executes(fireworkBaseCommands::addStar))))))).createBuilder().build();
+        dispatcher.register(Commands.literal("cft").then(Commands.literal("star").then(Commands.literal("add").then(Commands.argument("shape",EnumArgument.enumArgument(starShape.class)).then(Commands.argument("red",IntegerArgumentType.integer(0,255)).then(Commands.argument("green",IntegerArgumentType.integer(0,255)).then(Commands.argument("blue",IntegerArgumentType.integer(0,255)).then(Commands.argument("name",StringArgumentType.string()).executes(fireworkBaseCommands::addStarRGB))))))))).createBuilder().build();
     }
 
     /***
@@ -28,21 +28,21 @@ public class fireworkBaseCommands
      * The name is used to add more colors or effects later.
      * Deducts resources if the player is not in creative mode.
      * The command uses CustomInitUtility to handle the NBT data
-     * @see CustomInitUtility
+     * @see customInitUtility
      * @return 1 if successful and 0 otherwise
      * @throws CommandSyntaxException if the CommandSourceStack fails to get player.
      */
     private static int addStar(CommandContext<CommandSourceStack> context) throws CommandSyntaxException
     {
         ServerPlayer player = context.getSource().getPlayerOrException();
-        StarShape starShape = context.getArgument("shape", StarShape.class);
+        starShape starShape = context.getArgument("shape", org.multicoder.cft.common.utility.starShape.class);
         String starName = StringArgumentType.getString(context,"name");
         int intColor = IntegerArgumentType.getInteger(context,"color");
         if(player.isCreative())
         {
             ItemStack mainHand = player.getMainHandItem();
             if(!mainHand.is(Items.FIREWORK_ROCKET)){return 0;}
-            CustomInitUtility.AddStar(mainHand,starShape,intColor,starName);
+            customInitUtility.addStar(mainHand,starShape,intColor,starName);
         }
         else
         {
@@ -53,7 +53,7 @@ public class fireworkBaseCommands
             player.getInventory().getItem(whiteDyeIndex).shrink(1);
             ItemStack mainHand = player.getMainHandItem();
             if(!mainHand.is(Items.FIREWORK_ROCKET)){return 0;}
-            CustomInitUtility.AddStar(mainHand,starShape,intColor,starName);
+            customInitUtility.addStar(mainHand,starShape,intColor,starName);
         }
         return 1;
     }
@@ -64,14 +64,14 @@ public class fireworkBaseCommands
      * The name is used to add more colors or effects later.
      * Deducts resources if the player is not in creative mode.
      * The command uses CustomInitUtility to handle the NBT data
-     * @see CustomInitUtility
+     * @see customInitUtility
      * @return 1 if successful and 0 otherwise
      * @throws CommandSyntaxException if the CommandSourceStack fails to get player.
      */
     private static int addStarRGB(CommandContext<CommandSourceStack> context) throws CommandSyntaxException
     {
         ServerPlayer player = context.getSource().getPlayerOrException();
-        StarShape starShape = context.getArgument("shape", StarShape.class);
+        starShape starShape = context.getArgument("shape", org.multicoder.cft.common.utility.starShape.class);
         int red = IntegerArgumentType.getInteger(context,"red");
         int green = IntegerArgumentType.getInteger(context,"green");
         int blue = IntegerArgumentType.getInteger(context,"blue");
@@ -80,7 +80,7 @@ public class fireworkBaseCommands
         {
             ItemStack mainHand = player.getMainHandItem();
             if(!mainHand.is(Items.FIREWORK_ROCKET)){return 0;}
-            CustomInitUtility.AddStarRGB(mainHand,starShape,red,green,blue,starName);
+            customInitUtility.addStarRGB(mainHand,starShape,red,green,blue,starName);
         }
         else
         {
@@ -91,7 +91,7 @@ public class fireworkBaseCommands
             player.getInventory().getItem(whiteDyeIndex).shrink(1);
             ItemStack mainHand = player.getMainHandItem();
             if(!mainHand.is(Items.FIREWORK_ROCKET)){return 0;}
-            CustomInitUtility.AddStarRGB(mainHand,starShape,red,green,blue,starName);
+            customInitUtility.addStarRGB(mainHand,starShape,red,green,blue,starName);
         }
         return 1;
     }
@@ -100,7 +100,7 @@ public class fireworkBaseCommands
      * Creates a basic firework rocket.
      * Deducting resources if the player is not in creative mode.
      * The command uses CustomInitUtility to handle the NBT data
-     * @see CustomInitUtility
+     * @see customInitUtility
      * @return 1 if successful and 0 otherwise
      * @throws CommandSyntaxException if the CommandSourceStack fails to get player.
      */
@@ -111,7 +111,7 @@ public class fireworkBaseCommands
         if(player.isCreative())
         {
             ItemStack fireworkRocket = new ItemStack(Items.FIREWORK_ROCKET);
-            CustomInitUtility.Setup(fireworkRocket,flightDuration);
+            customInitUtility.setup(fireworkRocket,flightDuration);
             fireworkRocket.setCount(16);
             player.addItem(fireworkRocket);
         }
@@ -127,7 +127,7 @@ public class fireworkBaseCommands
             player.getInventory().setItem(gunpowderIndex,gunpowder);
             player.getInventory().setItem(paperIndex,paper);
             ItemStack fireworkRocket = new ItemStack(Items.FIREWORK_ROCKET);
-            CustomInitUtility.Setup(fireworkRocket,flightDuration);
+            customInitUtility.setup(fireworkRocket,flightDuration);
             fireworkRocket.setCount(16);
             player.addItem(fireworkRocket);
         }

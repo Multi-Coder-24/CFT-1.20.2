@@ -9,33 +9,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class FireworkWorldAddon extends SavedData
+public class fireworkWorldAddon extends SavedData
 {
-    private List<CompoundTag> SavedFireworks;
-    public static final String SaveName = "cft-presets";
+    private List<CompoundTag> savedFireworks;
+    public static final String saveName = "cft-presets";
 
-    public static SavedData.Factory DataFactory = new Factory<>(FireworkWorldAddon::create,FireworkWorldAddon::load,null);
+    public static SavedData.Factory addonFactory = new Factory<>(fireworkWorldAddon::create, fireworkWorldAddon::load,null);
 
-    private FireworkWorldAddon(List<CompoundTag> tags)
+    private fireworkWorldAddon(List<CompoundTag> tags)
     {
-        SavedFireworks = List.copyOf(tags);
+        savedFireworks = List.copyOf(tags);
     }
 
-    private FireworkWorldAddon()
+    private fireworkWorldAddon()
     {
-        SavedFireworks = new ArrayList<>();
+        savedFireworks = new ArrayList<>();
     }
 
-    public void SavePreset(CompoundTag tag)
+    public void savePreset(CompoundTag tag)
     {
-        SavedFireworks.add(tag);
+        savedFireworks.add(tag);
         this.setDirty();
     }
 
-    public CompoundTag LoadPreset(String name)
+    public CompoundTag loadPreset(String name)
     {
         AtomicReference<CompoundTag> Preset = new AtomicReference<>();
-       SavedFireworks.forEach(tag ->{
+       savedFireworks.forEach(tag ->{
             if(tag.getString("Name").equals(name))
             {
                 Preset.set(tag.getCompound("Fireworks"));
@@ -44,25 +44,25 @@ public class FireworkWorldAddon extends SavedData
         return Preset.get();
     }
 
-    public static FireworkWorldAddon create()
+    public static fireworkWorldAddon create()
     {
-        return new FireworkWorldAddon();
+        return new fireworkWorldAddon();
     }
 
-    public static FireworkWorldAddon load(CompoundTag tag)
+    public static fireworkWorldAddon load(CompoundTag tag)
     {
         List<CompoundTag> Tags = new ArrayList<>();
         tag.getList("Presets", Tag.TAG_COMPOUND).forEach(T ->
         {
             Tags.add((CompoundTag) T);
         });
-        return new FireworkWorldAddon(Tags);
+        return new fireworkWorldAddon(Tags);
     }
     @Override
     public CompoundTag save(CompoundTag p_77763_)
     {
         ListTag LT = new ListTag();
-        SavedFireworks.forEach(tag ->
+        savedFireworks.forEach(tag ->
         {
             LT.add(tag);
         });

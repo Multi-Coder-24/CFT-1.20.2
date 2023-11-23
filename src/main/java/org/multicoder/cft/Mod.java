@@ -5,10 +5,10 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import org.multicoder.cft.common.extra.RocketShape;
-import org.multicoder.cft.common.init.BlockEntityInit;
-import org.multicoder.cft.common.init.blockinit;
-import org.multicoder.cft.common.init.Iteminit;
+import org.multicoder.cft.common.extra.rocketShape;
+import org.multicoder.cft.common.init.blockEntityInit;
+import org.multicoder.cft.common.init.blockInit;
+import org.multicoder.cft.common.init.itemInit;
 
 @net.neoforged.fml.common.Mod(Mod.MOD_ID)
 public class Mod
@@ -17,24 +17,24 @@ public class Mod
 
     public Mod()
     {
-        IEventBus Bus = FMLJavaModLoadingContext.get().getModEventBus();
-        Bus.addListener(this::ClientSetup);
-        Bus.addListener(this::AddCreative);
-        Iteminit.ITEMS.register(Bus);
-        blockinit.BLOCKS.register(Bus);
-        BlockEntityInit.BLOCK_ENTITIES.register(Bus);
+        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        eventBus.addListener(this::ClientSetup);
+        eventBus.addListener(this::AddCreative);
+        itemInit.ITEMS.register(eventBus);
+        blockInit.BLOCKS.register(eventBus);
+        blockEntityInit.BLOCK_ENTITIES.register(eventBus);
     }
 
     public void ClientSetup(FMLClientSetupEvent event)
     {
-        RocketShape.Register();
+        rocketShape.register();
     }
 
     public void AddCreative(BuildCreativeModeTabContentsEvent event)
     {
         if(event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS)
         {
-            event.accept(blockinit.BARRAGE_BI.get());
+            event.accept(blockInit.BARRAGE_BI.get());
         }
     }
 }

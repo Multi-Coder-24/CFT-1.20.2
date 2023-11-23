@@ -8,7 +8,7 @@ import net.neoforged.neoforge.common.crafting.CompoundIngredient;
 
 import java.util.HashMap;
 
-public class RocketShape
+public class rocketShape
 {
     private static final FireworkRocketItem.Shape TRIANGLE = FireworkRocketItem.Shape.create("TRIANGLE",FireworkRocketItem.Shape.values().length,"triangle");
     private static final FireworkRocketItem.Shape DIAMOND = FireworkRocketItem.Shape.create("DIAMOND",FireworkRocketItem.Shape.values().length,"diamond");
@@ -16,13 +16,16 @@ public class RocketShape
     private static final FireworkRocketItem.Shape CROWN = FireworkRocketItem.Shape.create("CROWN",FireworkRocketItem.Shape.values().length,"crown");
     private static final FireworkRocketItem.Shape PYRAMID = FireworkRocketItem.Shape.create("PYRAMID",FireworkRocketItem.Shape.values().length,"pyramid");
 
-    public static void Register()
+    /***
+     * Registers shapes and recipes.
+     */
+    public static void register()
     {
-        FireworkShapeFactoryRegistry.register(TRIANGLE, RocketShapes::CreateTriangle);
-        FireworkShapeFactoryRegistry.register(PYRAMID, RocketShapes::CreatePyramid);
-        FireworkShapeFactoryRegistry.register(DIAMOND,RocketShapes::CreateDiamond);
-        FireworkShapeFactoryRegistry.register(SQUARE,RocketShapes::CreateSquare);
-        FireworkShapeFactoryRegistry.register(CROWN,RocketShapes::CreateCrown);
+        FireworkShapeFactoryRegistry.register(TRIANGLE, rocketShapes::CreateTriangle);
+        FireworkShapeFactoryRegistry.register(PYRAMID, rocketShapes::CreatePyramid);
+        FireworkShapeFactoryRegistry.register(DIAMOND, rocketShapes::CreateDiamond);
+        FireworkShapeFactoryRegistry.register(SQUARE, rocketShapes::CreateSquare);
+        FireworkShapeFactoryRegistry.register(CROWN, rocketShapes::CreateCrown);
         FireworkStarRecipe.SHAPE_BY_ITEM = new HashMap<>(FireworkStarRecipe.SHAPE_BY_ITEM);
         FireworkStarRecipe.SHAPE_BY_ITEM.put(Items.AMETHYST_SHARD,TRIANGLE);
         FireworkStarRecipe.SHAPE_BY_ITEM.put(Items.EMERALD,CROWN);

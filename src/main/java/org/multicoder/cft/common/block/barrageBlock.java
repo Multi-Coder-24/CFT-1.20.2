@@ -24,11 +24,11 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-import org.multicoder.cft.common.blockentity.BarrageBlockEntity;
-import org.multicoder.cft.common.utility.OptionsUtils;
+import org.multicoder.cft.common.blockentity.barrageBlockEntity;
+import org.multicoder.cft.common.utility.optionsUtils;
 
 @SuppressWarnings("all")
-public class BarrageBlock extends BaseEntityBlock
+public class barrageBlock extends BaseEntityBlock
 {
 
     private VoxelShape makeShape(){
@@ -37,7 +37,7 @@ public class BarrageBlock extends BaseEntityBlock
         return shape;
     }
 
-    public BarrageBlock()
+    public barrageBlock()
     {
         super(Properties.copy(Blocks.IRON_BLOCK).noOcclusion());
     }
@@ -62,7 +62,7 @@ public class BarrageBlock extends BaseEntityBlock
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state)
     {
-        return new BarrageBlockEntity(pos,state);
+        return new barrageBlockEntity(pos,state);
     }
 
     @Override
@@ -73,13 +73,12 @@ public class BarrageBlock extends BaseEntityBlock
     {
         if(!level.isClientSide())
         {
-            BarrageBlockEntity Entity = (BarrageBlockEntity) level.getBlockEntity(pos);
+            barrageBlockEntity Entity = (barrageBlockEntity) level.getBlockEntity(pos);
             if(level.hasNeighborSignal(neighbor))
             {
                 int DSig = level.getSignal(neighbor,Direction.DOWN);
                 if(DSig > 0 && DSig == 15)
                 {
-                    System.out.println("Redstone Pulse");
                     Entity.Pulse();
                 }
             }
@@ -89,8 +88,7 @@ public class BarrageBlock extends BaseEntityBlock
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource randomSource)
     {
-        System.out.println("Tick");
-        BarrageBlockEntity Entity = (BarrageBlockEntity) level.getBlockEntity(pos);
+        barrageBlockEntity Entity = (barrageBlockEntity) level.getBlockEntity(pos);
         Entity.Pulse();
     }
 
@@ -99,35 +97,35 @@ public class BarrageBlock extends BaseEntityBlock
     {
         if(!level.isClientSide())
         {
-            BarrageBlockEntity Entity = (BarrageBlockEntity) level.getBlockEntity(pos);
-            ItemStack Held = player.getItemInHand(hand);
-            if(Held.getItem().equals(Items.FIREWORK_ROCKET))
+            barrageBlockEntity blockEntity = (barrageBlockEntity) level.getBlockEntity(pos);
+            ItemStack mainHand = player.getItemInHand(hand);
+            if(mainHand.getItem().equals(Items.FIREWORK_ROCKET))
             {
-                Entity.AppendRocket(Held.getOrCreateTag());
+                blockEntity.AppendRocket(mainHand.getOrCreateTag());
                 player.sendSystemMessage(Component.translatable("interaction.cft.barrage.rocket_added"));
             }
-            if(Held.getItem().equals(Items.REDSTONE_TORCH)){
-                Entity.ModeSwitch();
-                byte B = Entity.Mode;
-                String M = OptionsUtils.OptionToString(B);
+            if(mainHand.getItem().equals(Items.REDSTONE_TORCH)){
+                blockEntity.ModeSwitch();
+                byte B = blockEntity.mode;
+                String M = optionsUtils.optionToString(B);
                 player.sendSystemMessage(Component.translatable("interaction.cft.barrage.mode_change",M));
             }
-            if(Held.getItem().equals(Items.LEVER)){
-                Entity.ChangeRandom();
-                boolean B = Entity.Random;
-                String M = OptionsUtils.OptionToString(B);
+            if(mainHand.getItem().equals(Items.LEVER)){
+                blockEntity.ChangeRandom();
+                boolean B = blockEntity.random;
+                String M = optionsUtils.optionToString(B);
                 player.sendSystemMessage(Component.translatable("interaction.cft.barrage.random",M));
             }
-            if(Held.getItem().equals(Items.COBBLESTONE))
+            if(mainHand.getItem().equals(Items.COBBLESTONE))
             {
-                Entity.IncreaseDelay();
-                String M = String.valueOf(Entity.Delay);
+                blockEntity.IncreaseDelay();
+                String M = String.valueOf(blockEntity.delay);
                 player.sendSystemMessage(Component.translatable("interaction.cft.barrage.delay",M));
             }
-            if(Held.getItem().equals(Items.DIRT))
+            if(mainHand.getItem().equals(Items.DIRT))
             {
-                Entity.DecreaseDelay();
-                String M = String.valueOf(Entity.Delay);
+                blockEntity.DecreaseDelay();
+                String M = String.valueOf(blockEntity.delay);
                 player.sendSystemMessage(Component.translatable("interaction.cft.barrage.delay",M));
             }
         }

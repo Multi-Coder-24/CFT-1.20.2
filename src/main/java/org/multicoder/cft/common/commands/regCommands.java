@@ -8,7 +8,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
-import org.multicoder.cft.common.utility.FireworkWorldAddon;
+import org.multicoder.cft.common.utility.fireworkWorldAddon;
 
 import java.util.Objects;
 
@@ -22,7 +22,7 @@ public class regCommands
     private static void onCommandRegister(RegisterCommandsEvent event)
     {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
-        UtilityCommands.Register(dispatcher);
+        utilityCommands.register(dispatcher);
         fireworkBaseCommands.registerCommands(dispatcher);
         fireworkModifierCommands.registerCommands(dispatcher);
     }
@@ -35,9 +35,9 @@ public class regCommands
     public static void onServerStart(ServerStartedEvent event)
     {
         ServerLevel level = event.getServer().getLevel(Level.OVERWORLD);
-        if(Objects.nonNull(FireworkWorldAddon.DataFactory) && Objects.nonNull(level))
+        if(Objects.nonNull(fireworkWorldAddon.addonFactory) && Objects.nonNull(level))
         {
-            FireworkWorldAddon FDA = level.getDataStorage().<FireworkWorldAddon>computeIfAbsent(FireworkWorldAddon.DataFactory,FireworkWorldAddon.SaveName);
+            fireworkWorldAddon FDA = level.getDataStorage().<fireworkWorldAddon>computeIfAbsent(fireworkWorldAddon.addonFactory, fireworkWorldAddon.saveName);
             FDA.setDirty();
         }
     }

@@ -2,7 +2,6 @@ package org.multicoder.cft.common.item;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -11,11 +10,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BarrageBlockItem extends BlockItem
+public class barrageBlockItem extends BlockItem
 {
 
 
-    public BarrageBlockItem(Block p_40565_)
+    public barrageBlockItem(Block p_40565_)
     {
         super(p_40565_, new Properties());
     }

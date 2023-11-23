@@ -6,14 +6,14 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.ForgeRegistries;
 import net.neoforged.neoforge.registries.RegistryObject;
 import org.multicoder.cft.Mod;
-import org.multicoder.cft.common.block.BarrageBlock;
-import org.multicoder.cft.common.item.BarrageBlockItem;
+import org.multicoder.cft.common.block.barrageBlock;
+import org.multicoder.cft.common.item.barrageBlockItem;
 
-public class blockinit
+public class blockInit
 {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Mod.MOD_ID);
 
-    public static final RegistryObject<Block> BARRAGE = BLOCKS.register("barrage", BarrageBlock::new);
+    public static final RegistryObject<Block> BARRAGE = BLOCKS.register("barrage", barrageBlock::new);
 
-    public static final RegistryObject<Item> BARRAGE_BI = Iteminit.ITEMS.register("barrage",() -> new BarrageBlockItem(BARRAGE.get()));
+    public static final RegistryObject<Item> BARRAGE_BI = itemInit.ITEMS.register("barrage",() -> new barrageBlockItem(BARRAGE.get()));
 }

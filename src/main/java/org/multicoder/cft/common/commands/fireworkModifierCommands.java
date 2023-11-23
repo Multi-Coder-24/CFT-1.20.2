@@ -10,7 +10,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import org.multicoder.cft.common.utility.CustomInitUtility;
+import org.multicoder.cft.common.utility.customInitUtility;
 
 public class fireworkModifierCommands
 {
@@ -29,7 +29,7 @@ public class fireworkModifierCommands
      * Adds the trail effect to a star with the given name.
      * Deducts resources if the player is not in creative mode.
      * The command uses CustomInitUtility to handle the NBT data
-     * @see CustomInitUtility
+     * @see customInitUtility
      * @return 1 if successful and 0 otherwise
      * @throws CommandSyntaxException if the CommandSourceStack fails to get player.
      */
@@ -41,7 +41,7 @@ public class fireworkModifierCommands
         {
             ItemStack mainHand = player.getMainHandItem();
             if(!mainHand.is(Items.FIREWORK_ROCKET)){return 0;}
-            CustomInitUtility.AddTrail(mainHand,starName);
+            customInitUtility.addTrail(mainHand,starName);
         }
         else
         {
@@ -50,7 +50,7 @@ public class fireworkModifierCommands
             ItemStack mainHand = player.getMainHandItem();
             if(!mainHand.is(Items.FIREWORK_ROCKET)){return 0;}
             player.getInventory().getItem(diamondIndex).shrink(1);
-            CustomInitUtility.AddTrail(mainHand,starName);
+            customInitUtility.addTrail(mainHand,starName);
         }
         return 1;
     }
@@ -59,7 +59,7 @@ public class fireworkModifierCommands
      * Adds the twinkle/sparkle effect to a star with the given name.
      * Deducts resources if the player is not in creative mode.
      * The command uses CustomInitUtility to handle the NBT data
-     * @see CustomInitUtility
+     * @see customInitUtility
      * @return 1 if successful and 0 otherwise
      * @throws CommandSyntaxException if the CommandSourceStack fails to get player.
      */
@@ -71,7 +71,7 @@ public class fireworkModifierCommands
         {
             ItemStack mainHand = player.getMainHandItem();
             if(!mainHand.is(Items.FIREWORK_ROCKET)){return 0;}
-            CustomInitUtility.AddTwinkle(mainHand,starName);
+            customInitUtility.addTwinkle(mainHand,starName);
         }
         else
         {
@@ -80,7 +80,7 @@ public class fireworkModifierCommands
             ItemStack mainHand = player.getMainHandItem();
             if(!mainHand.is(Items.FIREWORK_ROCKET)){return 0;}
             player.getInventory().getItem(glowstoneDustIndex).shrink(1);
-            CustomInitUtility.AddTwinkle(mainHand,starName);
+            customInitUtility.addTwinkle(mainHand,starName);
         }
         return 1;
     }
@@ -89,7 +89,7 @@ public class fireworkModifierCommands
      * Adds a custom color to the main part of a star with the given name.
      * Deducts resources if the player is not in creative mode.
      * The command uses CustomInitUtility to handle the NBT data
-     * @see CustomInitUtility
+     * @see customInitUtility
      * @return 1 if successful and 0 otherwise
      * @throws CommandSyntaxException if the CommandSourceStack fails to get player.
      */
@@ -104,7 +104,7 @@ public class fireworkModifierCommands
         {
             ItemStack mainHand = player.getMainHandItem();
             if(!mainHand.is(Items.FIREWORK_ROCKET)){return 0;}
-            CustomInitUtility.AppendColorRGB(mainHand,red,green,blue,starName);
+            customInitUtility.appendColorRGB(mainHand,red,green,blue,starName);
         }
         else
         {
@@ -113,7 +113,7 @@ public class fireworkModifierCommands
             player.getInventory().getItem(whiteDyeIndex).shrink(1);
             ItemStack mainHand = player.getMainHandItem();
             if(!mainHand.is(Items.FIREWORK_ROCKET)){return 0;}
-            CustomInitUtility.AppendColorRGB(mainHand,red,green,blue,starName);
+            customInitUtility.appendColorRGB(mainHand,red,green,blue,starName);
         }
         return 1;
     }
@@ -122,7 +122,7 @@ public class fireworkModifierCommands
      * Adds a custom color based upon the minecraft built-in color system to the main part of a star with the given name.
      * Deducts resources if the player is not in creative mode.
      * The command uses CustomInitUtility to handle the NBT data
-     * @see CustomInitUtility
+     * @see customInitUtility
      * @return 1 if successful and 0 otherwise
      * @throws CommandSyntaxException if the CommandSourceStack fails to get player.
      */
@@ -135,7 +135,7 @@ public class fireworkModifierCommands
         {
             ItemStack mainHand = player.getMainHandItem();
             if(!mainHand.is(Items.FIREWORK_ROCKET)){return 0;}
-            CustomInitUtility.AppendColor(mainHand,intColor,starName);
+            customInitUtility.appendColor(mainHand,intColor,starName);
         }
         else
         {
@@ -144,7 +144,7 @@ public class fireworkModifierCommands
             player.getInventory().getItem(whiteDyeIndex).shrink(1);
             ItemStack mainHand = player.getMainHandItem();
             if(!mainHand.is(Items.FIREWORK_ROCKET)){return 0;}
-            CustomInitUtility.AppendColor(mainHand,intColor,starName);
+            customInitUtility.appendColor(mainHand,intColor,starName);
         }
         return 1;
     }
@@ -153,7 +153,7 @@ public class fireworkModifierCommands
      * Adds a custom color to the fade part of a star with the given name.
      * Deducts resources if the player is not in creative mode.
      * The command uses CustomInitUtility to handle the NBT data
-     * @see CustomInitUtility
+     * @see customInitUtility
      * @return 1 if successful and 0 otherwise
      * @throws CommandSyntaxException if the CommandSourceStack fails to get player.
      */
@@ -168,7 +168,7 @@ public class fireworkModifierCommands
         {
             ItemStack mainHand = player.getMainHandItem();
             if(!mainHand.is(Items.FIREWORK_ROCKET)){return 0;}
-            CustomInitUtility.AppendFadeColorRGB(mainHand,red,green,blue,starName);
+            customInitUtility.appendFadeColorRGB(mainHand,red,green,blue,starName);
         }
         else
         {
@@ -177,7 +177,7 @@ public class fireworkModifierCommands
             player.getInventory().getItem(whiteDyeIndex).shrink(1);
             ItemStack mainHand = player.getMainHandItem();
             if(!mainHand.is(Items.FIREWORK_ROCKET)){return 0;}
-            CustomInitUtility.AppendFadeColorRGB(mainHand,red,green,blue,starName);
+            customInitUtility.appendFadeColorRGB(mainHand,red,green,blue,starName);
         }
         return 1;
     }
@@ -186,7 +186,7 @@ public class fireworkModifierCommands
      * Adds a custom color based upon the minecraft built-in color system to the fade part of a star with the given name.
      * Deducts resources if the player is not in creative mode.
      * The command uses CustomInitUtility to handle the NBT data
-     * @see CustomInitUtility
+     * @see customInitUtility
      * @return 1 if successful and 0 otherwise
      * @throws CommandSyntaxException if the CommandSourceStack fails to get player.
      */
@@ -199,7 +199,7 @@ public class fireworkModifierCommands
         {
             ItemStack mainHand = player.getMainHandItem();
             if(!mainHand.is(Items.FIREWORK_ROCKET)){return 0;}
-            CustomInitUtility.AppendFadeColor(mainHand,intColor,starName);
+            customInitUtility.appendFadeColor(mainHand,intColor,starName);
         }
         else
         {
@@ -208,7 +208,7 @@ public class fireworkModifierCommands
             player.getInventory().getItem(whiteDyeIndex).shrink(1);
             ItemStack mainHand = player.getMainHandItem();
             if(!mainHand.is(Items.FIREWORK_ROCKET)){return 0;}
-            CustomInitUtility.AppendFadeColor(mainHand,intColor,starName);
+            customInitUtility.appendFadeColor(mainHand,intColor,starName);
         }
         return 1;
     }
